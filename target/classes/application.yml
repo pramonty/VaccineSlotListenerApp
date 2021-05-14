@@ -1,0 +1,5 @@
+server:
+  port: 1992
+
+sendgrid:
+  key: ${SENDGRID_KEY:dummyKey}
