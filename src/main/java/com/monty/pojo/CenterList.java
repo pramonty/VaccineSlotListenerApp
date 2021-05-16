@@ -13,6 +13,13 @@ public class CenterList {
 	public void setCenters(List<Center> centers) {
 		this.centers = centers;
 	}
+
+	@Override
+	public String toString() {
+		return "CenterList [centers=" + centers + "]";
+	}
+	
+	
 	
 	
 

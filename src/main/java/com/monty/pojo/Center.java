@@ -67,6 +67,13 @@ public class Center {
 	public void setSessions(List<DistSession> sessions) {
 		this.sessions = sessions;
 	}
+	@Override
+	public String toString() {
+		return "Center [center_id=" + center_id + ", name=" + name + ", address=" + address + ", state_name="
+				+ state_name + ", district_name=" + district_name + ", block_name=" + block_name + ", pincode="
+				+ pincode + ", fee_type=" + fee_type + ", sessions=" + sessions + "]";
+	}
+	
 	
 	
 

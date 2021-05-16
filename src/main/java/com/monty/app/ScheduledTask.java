@@ -45,16 +45,17 @@ public class ScheduledTask {
 	AudioPlayer audioPlayer;
 	
 	//Change the fixed delay as per requirements. this is in ms
-	@Scheduled(fixedDelay = 60000,initialDelay = 5000)
+	@Scheduled(fixedDelay = 10000,initialDelay = 5000)
 	public void checkAvailability() {
 		
 		LOGGER.info("Starting Check");
 		String messageBody="";
 		
 		
-		//update the district ID as per your need. ID must be 
-        availableSlotDistrict( messageBody,"140","NEWDELHI");
+		
         availableSlotDistrict( messageBody,"446","BBSR");
+        availableSlotDistrict( messageBody,"457","CTC");
+        //availableSlotDistrict( messageBody,"141","CDEL");
 	}
 
 
@@ -66,10 +67,11 @@ public class ScheduledTask {
 		boolean foundSlot=false;
         LOGGER.info("The response: "+centerList.getCenters().size());
         
+        
         for(Center cntr: centerList.getCenters()) {
         	for(DistSession sess:cntr.getSessions()) {
         		try {
-        			if(Integer.parseInt(sess.getAvailable_capacity())>0 && Integer.parseInt(sess.getMin_age_limit())==18) {
+        			if(Integer.parseInt(sess.getAvailable_capacity_dose1())>0 && Integer.parseInt(sess.getMin_age_limit())==18) {
         				LOGGER.info("Available");
         				LOGGER.info(sess.toString());
         				foundSlot=true;

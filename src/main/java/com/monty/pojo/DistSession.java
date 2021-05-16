@@ -8,6 +8,8 @@ public class DistSession {
 	private String available_capacity;
 	private String min_age_limit;
 	private String vaccine;
+	private String available_capacity_dose1;
+	private String available_capacity_dose2;
 	public String getSession_id() {
 		return session_id;
 	}
@@ -38,11 +40,26 @@ public class DistSession {
 	public void setVaccine(String vaccine) {
 		this.vaccine = vaccine;
 	}
+	public String getAvailable_capacity_dose1() {
+		return available_capacity_dose1;
+	}
+	public void setAvailable_capacity_dose1(String available_capacity_dose1) {
+		this.available_capacity_dose1 = available_capacity_dose1;
+	}
+	public String getAvailable_capacity_dose2() {
+		return available_capacity_dose2;
+	}
+	public void setAvailable_capacity_dose2(String available_capacity_dose2) {
+		this.available_capacity_dose2 = available_capacity_dose2;
+	}
 	@Override
 	public String toString() {
 		return "DistSession [session_id=" + session_id + ", date=" + date + ", available_capacity=" + available_capacity
-				+ ", min_age_limit=" + min_age_limit + ", vaccine=" + vaccine + "]";
+				+ ", min_age_limit=" + min_age_limit + ", vaccine=" + vaccine + ", available_capacity_dose1="
+				+ available_capacity_dose1 + ", available_capacity_dose2=" + available_capacity_dose2 + "]";
 	}
+	
+	
 	
 	
 	
