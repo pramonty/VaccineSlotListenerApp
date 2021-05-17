@@ -63,6 +63,7 @@ public class ScheduledTask {
 	private void availableSlotDistrict( String messageBody,String districtId,String districtName) {
 		LOGGER.info("Checking for: "+districtName);
 		//ResponseEntity<CenterList> response = restTemplate.exchange("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id="+districtId+"&date=15-05-2021", HttpMethod.GET,entity,CenterList.class);
+		try {
 		CenterList centerList=hitApi.getCenters(districtId);
 		boolean foundSlot=false;
         LOGGER.info("The response: "+centerList.getCenters().size());
@@ -70,8 +71,7 @@ public class ScheduledTask {
         
         for(Center cntr: centerList.getCenters()) {
         	for(DistSession sess:cntr.getSessions()) {
-        		try {
-        			if(Integer.parseInt(sess.getAvailable_capacity_dose1())>0 && Integer.parseInt(sess.getMin_age_limit())==18) {
+        			if(Integer.parseInt(sess.getAvailable_capacity_dose1())>1 && Integer.parseInt(sess.getMin_age_limit())==18) {
         				LOGGER.info("Available");
         				LOGGER.info(sess.toString());
         				foundSlot=true;
@@ -80,16 +80,14 @@ public class ScheduledTask {
         			}
         			
         			//this break is to raise alarm at the very first slot opening. Comment/Uncomment as per your wish
-        			if(foundSlot) {
-        				break;
-        			}
-        		}catch(NumberFormatException exp) {
-        			//LOGGER.info("Number Format Exception for: "+sess.toString());
-        			LOGGER.info("Number format exception for: "+sess.getAvailable_capacity()+" or "+sess.getMin_age_limit());
-            	}
+					/*
+					 * if(foundSlot) { break; }
+					 */
+        		
         	}
         	
         }
+		
         LOGGER.info("Scanned through all");
         if(foundSlot) {
         	//mailSender.sendMail("Available slots "+districtName, "Available for: "+messageBody);
@@ -97,6 +95,10 @@ public class ScheduledTask {
         	audioPlayer.soundAlarm();
         	
        }
+		}catch(Exception exp) {
+			//LOGGER.info("Number Format Exception for: "+sess.toString());
+			LOGGER.info("Some exception occured: ",exp);
+    	}
 	}
 	
 	
